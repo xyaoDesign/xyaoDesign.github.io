@@ -13,7 +13,10 @@ body{margin:0;background:#222}
 a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 .rot{transition:opacity 500ms ease-in-out, transform 500ms ease-in-out}
 .fade{transition:opacity 300ms ease, box-shadow 300ms ease}
-@media (prefers-reduced-motion: reduce){.rot,.fade{transition:none}}
+.pump{transition:transform 260ms cubic-bezier(.34,1.7,.64,1);transform-origin:center}
+.pump:hover{transform:scale(1.06)}
+.pump-medal:hover{transform:scale(1.12)}
+@media (prefers-reduced-motion: reduce){.rot,.fade,.pump{transition:none}.pump:hover,.pump-medal:hover{transform:none}}
 </style>
 <link rel="stylesheet" href="site.css">
 </head>
@@ -53,69 +56,79 @@ a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 
 <div style="width: 100%; max-width: 1160px; padding: 30px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 60px">
 
-<a class="fade card" href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="--rgb: 244,242,237; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<div class="fade card" style="--rgb: 244,242,237; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-bwc.svg" alt="" style="display: block; width: 23.8%; height: 68.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,242,237,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="--rgb: 244,214,121; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 244,214,121; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-applied-behavior.svg" alt="" style="display: block; width: 28.5%; height: 38.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,214,121,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="--rgb: 255,200,56; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 255,200,56; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: flex-end">
 <img src="assets/thumb-machine.svg" alt="" style="display: block; width: 88.24%; height: 96.97%; object-fit: contain">
 </div>
-
-<img src="assets/machine-medal.svg" alt="" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1">
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(255,200,56,0.25); opacity: 0">
 
 <img src="assets/render-0004.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 5px; pointer-events: none">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="--rgb: 206,177,255; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a class="pump pump-medal" href="https://leartesstudios.com/challenges/veiled-realms-art-challenge" target="_blank" rel="noopener" aria-label="Veiled Realms Art Challenge, 3D Environment Student Winner (opens in a new tab)" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1; display: block; border-radius: 50%">
+<img src="assets/machine-medal.svg" alt="" style="display: block; width: 47px; height: 47px">
+</a>
+
+</div>
+
+<div class="fade card" style="--rgb: 206,177,255; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-obstetrics.svg" alt="" style="display: block; width: 28%; height: 52.7%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(206,177,255,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
 </div>
 </div>
 </a>
+
+</div>
 
 
 </div>
@@ -162,20 +175,22 @@ a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 
 <div style="width: 100%; max-width: 1160px; padding: 30px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 60px">
 
-<a class="fade card" href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="--rgb: 244,242,237; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<div class="fade card" style="--rgb: 244,242,237; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-bwc.svg" alt="" style="display: block; width: 23.8%; height: 68.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,242,237,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
 </div>
 </div>
 </a>
+
+</div>
 
 
 </div>
@@ -197,50 +212,56 @@ a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 
 <div style="width: 100%; max-width: 1160px; padding: 30px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 60px">
 
-<a class="fade card" href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="--rgb: 244,214,121; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<div class="fade card" style="--rgb: 244,214,121; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-applied-behavior.svg" alt="" style="display: block; width: 28.5%; height: 38.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,214,121,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="--rgb: 206,177,255; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 206,177,255; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-obstetrics.svg" alt="" style="display: block; width: 28%; height: 52.7%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(206,177,255,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="eye.html" aria-label="The Eye — Medical | XR, 2026" style="--rgb: 255,165,166; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 255,165,166; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="eye.html" aria-label="The Eye — Medical | XR, 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-eye.svg" alt="" style="display: block; width: 31.1%; height: 51.5%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(255,165,166,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Eye</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Eye</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | XR</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | XR</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
 </div>
 </div>
 </a>
+
+</div>
 
 
 </div>
@@ -262,41 +283,47 @@ a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 
 <div style="width: 100%; max-width: 1160px; padding: 30px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 60px">
 
-<a class="fade card" href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="--rgb: 255,200,56; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<div class="fade card" style="--rgb: 255,200,56; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: flex-end">
 <img src="assets/thumb-machine.svg" alt="" style="display: block; width: 88.24%; height: 96.97%; object-fit: contain">
 </div>
-
-<img src="assets/machine-medal.svg" alt="" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1">
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(255,200,56,0.25); opacity: 0">
 
 <img src="assets/render-0004.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 5px; pointer-events: none">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="temple.html" aria-label="The Temple — 3D Environment Art | Unity, 2025" style="--rgb: 244,55,55; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a class="pump pump-medal" href="https://leartesstudios.com/challenges/veiled-realms-art-challenge" target="_blank" rel="noopener" aria-label="Veiled Realms Art Challenge, 3D Environment Student Winner (opens in a new tab)" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1; display: block; border-radius: 50%">
+<img src="assets/machine-medal.svg" alt="" style="display: block; width: 47px; height: 47px">
+</a>
+
+</div>
+
+<div class="fade card" style="--rgb: 244,55,55; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="temple.html" aria-label="The Temple — 3D Environment Art | Unity, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-temple.svg" alt="" style="display: block; width: 89%; height: 98.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,55,55,0.25); opacity: 0">
 
 <img src="assets/end-png.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 5px; pointer-events: none">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Temple</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Temple</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
+
+</div>
 
 
 </div>
@@ -318,101 +345,115 @@ a{color:#fff5e0;text-decoration:none}a:hover{color:#ffffff}
 
 <div style="width: 100%; max-width: 1160px; padding: 30px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 60px">
 
-<a class="fade card" href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="--rgb: 244,242,237; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<div class="fade card" style="--rgb: 244,242,237; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="bwc.html" aria-label="Body-Worn Camera — UI/UX | Human-Centered Design, 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-bwc.svg" alt="" style="display: block; width: 23.8%; height: 68.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,242,237,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Body-Worn Camera</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">UI/UX | Human-Centered Design</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="--rgb: 255,200,56; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 255,200,56; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="machine.html" aria-label="The Machine — 3D Environment Art | Unreal Engine, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: flex-end">
 <img src="assets/thumb-machine.svg" alt="" style="display: block; width: 88.24%; height: 96.97%; object-fit: contain">
 </div>
-
-<img src="assets/machine-medal.svg" alt="" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1">
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(255,200,56,0.25); opacity: 0">
 
 <img src="assets/render-0004.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 5px; pointer-events: none">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Machine</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unreal Engine</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="--rgb: 244,214,121; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a class="pump pump-medal" href="https://leartesstudios.com/challenges/veiled-realms-art-challenge" target="_blank" rel="noopener" aria-label="Veiled Realms Art Challenge, 3D Environment Student Winner (opens in a new tab)" style="position: absolute; right: 20px; top: 20px; width: 47px; height: 47px; z-index: 1; display: block; border-radius: 50%">
+<img src="assets/machine-medal.svg" alt="" style="display: block; width: 47px; height: 47px">
+</a>
+
+</div>
+
+<div class="fade card" style="--rgb: 244,214,121; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="applied-behavior.html" aria-label="Applied Behavior — Medical | Education | Unity, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-applied-behavior.svg" alt="" style="display: block; width: 28.5%; height: 38.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,214,121,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Applied Behavior</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Education | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="temple.html" aria-label="The Temple — 3D Environment Art | Unity, 2025" style="--rgb: 244,55,55; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 244,55,55; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="temple.html" aria-label="The Temple — 3D Environment Art | Unity, 2025" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-temple.svg" alt="" style="display: block; width: 89%; height: 98.8%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(244,55,55,0.25); opacity: 0">
 
 <img src="assets/end-png.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 5px; pointer-events: none">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Temple</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Temple</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">3D Environment Art | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="--rgb: 206,177,255; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 206,177,255; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="obstetrics.html" aria-label="Obstetrics — Medical | Unity, 2025 - 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-obstetrics.svg" alt="" style="display: block; width: 28%; height: 52.7%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(206,177,255,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">Obstetrics</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | Unity</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2025 - 2026</p>
 </div>
 </div>
 </a>
 
-<a class="fade card" href="eye.html" aria-label="The Eye — Medical | XR, 2026" style="--rgb: 255,165,166; position: relative; display: block; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; overflow: hidden; background: #222222; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+</div>
+
+<div class="fade card" style="--rgb: 255,165,166; position: relative; flex: 1 1 420px; max-width: 550px; min-width: 0; aspect-ratio: 5 / 3; border-radius: 5px; box-shadow: 0 0 5px 0 rgba(0,0,0,0.15)">
+<a href="eye.html" aria-label="The Eye — Medical | XR, 2026" style="position: absolute; inset: 0; display: block; border-radius: 5px; overflow: hidden; background: #222222">
 <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center">
 <img src="assets/thumb-eye.svg" alt="" style="display: block; width: 31.1%; height: 51.5%; object-fit: contain">
 </div>
-
 <div class="fade ov" style="position: absolute; inset: 0; border-radius: 5px; background: #222222; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 0 5px 0 rgba(255,165,166,0.25); opacity: 0">
 
-<p style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Eye</p>
+<p class="pump" style="position: relative; margin: 0; font-weight: 700; font-size: 32px; letter-spacing: -0.16px; line-height: 0.95; text-align: center; color: #fff5e0">The Eye</p>
 <div style="position: relative; display: flex; flex-direction: column; align-items: center">
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | XR</p>
-<p style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">Medical | XR</p>
+<p class="pump" style="margin: 0; font-size: 20px; letter-spacing: -0.1px; line-height: 1.45; text-align: center; color: #fff5e0">2026</p>
 </div>
 </div>
 </a>
+
+</div>
 
 
 </div>

@@ -4,7 +4,7 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 :focus-visible { outline: 2px solid #fff5e0; outline-offset: 3px; }
 /* Landing-page project cards: hover / keyboard focus state */
-.card:hover, .card:focus-visible {
+.card:hover, .card:focus-visible, .card:has(> a:first-child:focus-visible) {
   box-shadow: 0 0 15px 0 rgba(var(--rgb), 0.15), 0 0 5px 0 rgba(0, 0, 0, 0.15) !important;
 }
-.card:hover .ov, .card:focus-visible .ov { opacity: 1 !important; }
+.card:hover .ov, .card:focus-visible .ov, .card:has(> a:first-child:focus-visible) .ov { opacity: 1 !important; }
