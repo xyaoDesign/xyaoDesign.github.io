@@ -216,7 +216,122 @@
         var cond = el.getAttribute('data-lb-if');
         if (cond) el.hidden = !lb[cond];
       });
+
+      resetPinch();
     };
+
+    /* ---------- Touch screens: pinch to zoom, drag to pan ---------- */
+    var touchMode = window.matchMedia &&
+      window.matchMedia('(hover: none) and (pointer: coarse)');
+    var lbImg = dlg.querySelector('img[data-lbt-src]');
+    var pinch = { scale: 1, x: 0, y: 0 };
+    var gesture = null;
+    var lastTap = 0;
+
+    var applyPinch = function (animate) {
+      if (!lbImg) return;
+      lbImg.style.transition = animate ? 'transform 200ms ease' : 'none';
+      lbImg.style.transform = pinch.scale === 1
+        ? ''
+        : 'translate(' + pinch.x + 'px, ' + pinch.y + 'px) scale(' + pinch.scale + ')';
+    };
+
+    var clampPan = function () {
+      if (!lbImg) return;
+      var maxX = (lbImg.offsetWidth * (pinch.scale - 1)) / 2;
+      var maxY = (lbImg.offsetHeight * (pinch.scale - 1)) / 2;
+      pinch.x = Math.max(-maxX, Math.min(maxX, pinch.x));
+      pinch.y = Math.max(-maxY, Math.min(maxY, pinch.y));
+    };
+
+    function resetPinch() {
+      pinch = { scale: 1, x: 0, y: 0 };
+      gesture = null;
+      applyPinch(false);
+    }
+
+    var dist = function (a, b) {
+      return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    };
+    var mid = function (a, b) {
+      return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
+    };
+
+    if (lbImg) {
+      var area = lbImg.parentElement;
+
+      area.addEventListener('touchstart', function (e) {
+        if (!touchMode || !touchMode.matches) return;
+        var t = e.touches;
+
+        if (t.length === 2) {
+          var m = mid(t[0], t[1]);
+          gesture = {
+            type: 'pinch',
+            d: dist(t[0], t[1]),
+            scale: pinch.scale,
+            mx: m.x, my: m.y, x: pinch.x, y: pinch.y
+          };
+        } else if (t.length === 1) {
+          var now = Date.now();
+          if (now - lastTap < 300) {
+            // Double tap: toggle between fit and 2.5x.
+            e.preventDefault();
+            pinch.scale = pinch.scale > 1 ? 1 : 2.5;
+            pinch.x = 0;
+            pinch.y = 0;
+            applyPinch(true);
+            lastTap = 0;
+            gesture = null;
+            return;
+          }
+          lastTap = now;
+          if (pinch.scale > 1) {
+            gesture = {
+              type: 'pan',
+              sx: t[0].clientX, sy: t[0].clientY, x: pinch.x, y: pinch.y
+            };
+          }
+        }
+      }, { passive: false });
+
+      area.addEventListener('touchmove', function (e) {
+        if (!gesture) return;
+        var t = e.touches;
+        e.preventDefault();
+
+        if (gesture.type === 'pinch' && t.length === 2) {
+          var m = mid(t[0], t[1]);
+          pinch.scale = Math.max(1, Math.min(5, gesture.scale * dist(t[0], t[1]) / gesture.d));
+          pinch.x = gesture.x + (m.x - gesture.mx);
+          pinch.y = gesture.y + (m.y - gesture.my);
+        } else if (gesture.type === 'pan' && t.length === 1) {
+          pinch.x = gesture.x + (t[0].clientX - gesture.sx);
+          pinch.y = gesture.y + (t[0].clientY - gesture.sy);
+        }
+
+        clampPan();
+        applyPinch(false);
+      }, { passive: false });
+
+      area.addEventListener('touchend', function (e) {
+        if (!gesture) return;
+        if (e.touches.length === 0) {
+          if (pinch.scale < 1.05) resetPinch();
+          gesture = null;
+        } else if (e.touches.length === 1 && pinch.scale > 1) {
+          // One finger lifted after a pinch: keep panning with the other.
+          gesture = {
+            type: 'pan',
+            sx: e.touches[0].clientX, sy: e.touches[0].clientY,
+            x: pinch.x, y: pinch.y
+          };
+        }
+      });
+
+      // Stop Safari's own page zoom while the lightbox is open.
+      dlg.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+    }
 
     var open = function (g, i) {
       if (!data.groups[g] || !data.groups[g][i]) return;
@@ -234,6 +349,7 @@
     };
 
     var close = function () {
+      resetPinch();
       dlg.hidden = true;
       group = null;
       document.documentElement.style.overflow = '';

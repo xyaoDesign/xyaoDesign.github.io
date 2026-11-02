@@ -129,3 +129,8 @@ html { scroll-behavior: smooth; }
     display: none;
   }
 }
+/* Lightbox on touch screens: pinch to zoom replaces the Fit / 100% toggle. */
+@media (hover: none) and (pointer: coarse) {
+  [data-lb-dialog] [data-act="zoom"] { display: none !important; }
+  [data-lb-dialog] img[data-lbt-src] { touch-action: none; will-change: transform; }
+}
