@@ -198,6 +198,7 @@
     };
 
     var paint = function () {
+      resetPinch();
       var lb = current();
 
       var els = [dlg].concat(
@@ -216,30 +217,78 @@
         var cond = el.getAttribute('data-lb-if');
         if (cond) el.hidden = !lb[cond];
       });
-
-      resetPinch();
     };
 
     /* ---------- Touch screens: pinch to zoom, drag to pan ---------- */
-    var touchMode = window.matchMedia &&
-      window.matchMedia('(hover: none) and (pointer: coarse)');
+    // Gestures are captured on the whole lightbox (not just the image), so a
+    // pinch that starts on the dark background still zooms the picture
+    // instead of the page.
     var lbImg = dlg.querySelector('img[data-lbt-src]');
     var pinch = { scale: 1, x: 0, y: 0 };
     var gesture = null;
     var lastTap = 0;
+    // Size of the image when it fits the screen, and the zoom level that is
+    // currently "baked in" as a real width/height (see commitPinch).
+    var base = null;
+    var committed = 1;
 
+    var measureBase = function () {
+      if (!base && lbImg) base = { w: lbImg.offsetWidth, h: lbImg.offsetHeight };
+    };
+
+    // Beyond the image's own pixel size zooming only adds blur, so the limit
+    // follows the real resolution of each picture.
+    var maxScale = function () {
+      if (!lbImg || !base || !base.w) return 3;
+      var native = lbImg.naturalWidth / base.w;
+      return Math.max(2, Math.min(8, native * 1.5));
+    };
+
+    // While fingers move, a CSS transform keeps the gesture smooth.
     var applyPinch = function (animate) {
       if (!lbImg) return;
       lbImg.style.transition = animate ? 'transform 200ms ease' : 'none';
-      lbImg.style.transform = pinch.scale === 1
+      var rel = pinch.scale / committed;
+      lbImg.style.transform = (pinch.scale === 1 && committed === 1)
         ? ''
-        : 'translate(' + pinch.x + 'px, ' + pinch.y + 'px) scale(' + pinch.scale + ')';
+        : 'translate(' + pinch.x + 'px, ' + pinch.y + 'px)' + (rel === 1 ? '' : ' scale(' + rel + ')');
+    };
+
+    // When the gesture ends, the zoom is applied as a real width/height so the
+    // browser redraws the picture at full resolution instead of stretching a
+    // low-resolution snapshot (that stretching is what made it blurry).
+    var commitPinch = function () {
+      if (!lbImg || !base) return;
+      if (pinch.scale <= 1) {
+        clearSize();
+      } else {
+        if (savedStyle === null) savedStyle = lbImg.getAttribute('style') || '';
+        lbImg.style.margin = '0';
+        lbImg.style.maxWidth = 'none';
+        lbImg.style.maxHeight = 'none';
+        lbImg.style.width = Math.round(base.w * pinch.scale) + 'px';
+        lbImg.style.height = Math.round(base.h * pinch.scale) + 'px';
+        lbImg.style.flexShrink = '0';
+        committed = pinch.scale;
+      }
+      applyPinch(false);
+    };
+
+    // Put back the image's original fit-to-screen styling.
+    var savedStyle = null;
+    var clearSize = function () {
+      if (!lbImg) return;
+      if (savedStyle !== null) {
+        lbImg.setAttribute('style', savedStyle);
+        savedStyle = null;
+      }
+      committed = 1;
     };
 
     var clampPan = function () {
-      if (!lbImg) return;
-      var maxX = (lbImg.offsetWidth * (pinch.scale - 1)) / 2;
-      var maxY = (lbImg.offsetHeight * (pinch.scale - 1)) / 2;
+      if (!lbImg || !base) return;
+      var maxX = (base.w * (pinch.scale - 1)) / 2;
+      var maxY = (base.h * (pinch.scale - 1)) / 2;
       pinch.x = Math.max(-maxX, Math.min(maxX, pinch.x));
       pinch.y = Math.max(-maxY, Math.min(maxY, pinch.y));
     };
@@ -247,8 +296,18 @@
     function resetPinch() {
       pinch = { scale: 1, x: 0, y: 0 };
       gesture = null;
+      clearSize();
+      base = null;
       applyPinch(false);
     }
+
+    // Centre of the image's untransformed box, in screen coordinates.
+    var imgCentre = function () {
+      // Scaling happens around the image centre, so the visible centre is the
+      // resting centre plus the current pan offset.
+      var r = lbImg.getBoundingClientRect();
+      return { x: r.left + r.width / 2 - pinch.x, y: r.top + r.height / 2 - pinch.y };
+    };
 
     var dist = function (a, b) {
       return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
@@ -257,54 +316,69 @@
       return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
     };
 
-    if (lbImg) {
-      var area = lbImg.parentElement;
+    var startPinch = function (t) {
+      measureBase();
+      var m = mid(t[0], t[1]);
+      var c = imgCentre();
+      // Image-local point under the fingers; it stays under them while zooming.
+      gesture = {
+        type: 'pinch',
+        d: dist(t[0], t[1]) || 1,
+        scale: pinch.scale,
+        qx: (m.x - c.x - pinch.x) / pinch.scale,
+        qy: (m.y - c.y - pinch.y) / pinch.scale,
+        cx: c.x, cy: c.y
+      };
+    };
 
-      area.addEventListener('touchstart', function (e) {
-        if (!touchMode || !touchMode.matches) return;
+    var startPan = function (t) {
+      gesture = { type: 'pan', sx: t.clientX, sy: t.clientY, x: pinch.x, y: pinch.y };
+    };
+
+    if (lbImg) {
+      dlg.addEventListener('touchstart', function (e) {
+        if (dlg.hidden) return;
         var t = e.touches;
 
-        if (t.length === 2) {
-          var m = mid(t[0], t[1]);
-          gesture = {
-            type: 'pinch',
-            d: dist(t[0], t[1]),
-            scale: pinch.scale,
-            mx: m.x, my: m.y, x: pinch.x, y: pinch.y
-          };
-        } else if (t.length === 1) {
-          var now = Date.now();
-          if (now - lastTap < 300) {
-            // Double tap: toggle between fit and 2.5x.
-            e.preventDefault();
-            pinch.scale = pinch.scale > 1 ? 1 : 2.5;
-            pinch.x = 0;
-            pinch.y = 0;
-            applyPinch(true);
-            lastTap = 0;
-            gesture = null;
-            return;
-          }
-          lastTap = now;
-          if (pinch.scale > 1) {
-            gesture = {
-              type: 'pan',
-              sx: t[0].clientX, sy: t[0].clientY, x: pinch.x, y: pinch.y
-            };
-          }
+        if (t.length >= 2) {
+          e.preventDefault();
+          startPinch(t);
+          return;
         }
+
+        // Single finger on a button: let the tap through.
+        if (e.target.closest && e.target.closest('button, a')) return;
+
+        var now = Date.now();
+        if (now - lastTap < 300) {
+          // Double tap: toggle between fit and 2.5x.
+          e.preventDefault();
+          measureBase();
+          pinch.scale = pinch.scale > 1 ? 1 : Math.min(2.5, maxScale());
+          pinch.x = 0;
+          pinch.y = 0;
+          commitPinch();
+          lastTap = 0;
+          gesture = null;
+          return;
+        }
+        lastTap = now;
+        if (pinch.scale > 1) startPan(t[0]);
       }, { passive: false });
 
-      area.addEventListener('touchmove', function (e) {
-        if (!gesture) return;
+      dlg.addEventListener('touchmove', function (e) {
+        if (dlg.hidden) return;
         var t = e.touches;
-        e.preventDefault();
 
-        if (gesture.type === 'pinch' && t.length === 2) {
+        // Never let the page itself zoom or scroll behind the lightbox.
+        if (t.length >= 2 || gesture) e.preventDefault();
+        if (!gesture) return;
+
+        if (gesture.type === 'pinch' && t.length >= 2) {
           var m = mid(t[0], t[1]);
-          pinch.scale = Math.max(1, Math.min(5, gesture.scale * dist(t[0], t[1]) / gesture.d));
-          pinch.x = gesture.x + (m.x - gesture.mx);
-          pinch.y = gesture.y + (m.y - gesture.my);
+          pinch.scale = Math.max(1, Math.min(maxScale(), gesture.scale * dist(t[0], t[1]) / gesture.d));
+          pinch.x = m.x - gesture.cx - pinch.scale * gesture.qx;
+          pinch.y = m.y - gesture.cy - pinch.scale * gesture.qy;
         } else if (gesture.type === 'pan' && t.length === 1) {
           pinch.x = gesture.x + (t[0].clientX - gesture.sx);
           pinch.y = gesture.y + (t[0].clientY - gesture.sy);
@@ -314,23 +388,28 @@
         applyPinch(false);
       }, { passive: false });
 
-      area.addEventListener('touchend', function (e) {
+      var endTouch = function (e) {
         if (!gesture) return;
         if (e.touches.length === 0) {
-          if (pinch.scale < 1.05) resetPinch();
+          if (pinch.scale < 1.05) pinch = { scale: 1, x: 0, y: 0 };
           gesture = null;
+          commitPinch();
         } else if (e.touches.length === 1 && pinch.scale > 1) {
           // One finger lifted after a pinch: keep panning with the other.
-          gesture = {
-            type: 'pan',
-            sx: e.touches[0].clientX, sy: e.touches[0].clientY,
-            x: pinch.x, y: pinch.y
-          };
+          commitPinch();
+          startPan(e.touches[0]);
         }
-      });
+      };
+      dlg.addEventListener('touchend', endTouch);
+      dlg.addEventListener('touchcancel', endTouch);
 
-      // Stop Safari's own page zoom while the lightbox is open.
-      dlg.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+      // iOS Safari fires its own gesture events for page zoom; block them
+      // while the lightbox is open.
+      ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (type) {
+        document.addEventListener(type, function (e) {
+          if (!dlg.hidden) e.preventDefault();
+        }, { passive: false });
+      });
     }
 
     var open = function (g, i) {
