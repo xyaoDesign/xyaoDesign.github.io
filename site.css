@@ -1,10 +1,131 @@
 /* Shared extras for the static export */
 [hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-:focus-visible { outline: 2px solid #fff5e0; outline-offset: 3px; }
-/* Landing-page project cards: hover / keyboard focus state */
-.card:hover, .card:focus-visible, .card:has(> a:first-child:focus-visible) {
-  box-shadow: 0 0 15px 0 rgba(var(--rgb), 0.15), 0 0 5px 0 rgba(0, 0, 0, 0.15) !important;
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
-.card:hover .ov, .card:focus-visible .ov, .card:has(> a:first-child:focus-visible) .ov { opacity: 1 !important; }
+
+:focus-visible {
+  outline: 2px solid #fff5e0;
+  outline-offset: 3px;
+}
+
+/* Landing-page project cards: keyboard and touch-scroll states */
+.card.is-scroll-active,
+.card:focus-visible,
+.card:has(> a:first-child:focus-visible) {
+  box-shadow:
+    0 0 15px 0 rgba(var(--rgb), 0.15),
+    0 0 5px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.card.is-scroll-active .ov,
+.card:focus-visible .ov,
+.card:has(> a:first-child:focus-visible) .ov {
+  opacity: 1 !important;
+}
+
+/* Avoid sticky simulated hover on touchscreens. */
+@media (hover: hover) {
+  .card:hover {
+    box-shadow:
+      0 0 15px 0 rgba(var(--rgb), 0.15),
+      0 0 5px 0 rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .card:hover .ov {
+    opacity: 1 !important;
+  }
+}
+@media (max-width: 600px) {
+  main > section[aria-label="Intro"],
+  main > section[aria-label="Projects"] {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+/* Mobile layouts */
+@media (max-width: 600px) {
+
+  /* Landing page: slightly larger side margins */
+  main > section[aria-label="Intro"],
+  main > section[aria-label="Projects"] {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Profile section: remove fixed height and match side margins */
+  #about {
+    height: auto !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Smaller, left-aligned slogan beneath the profile picture */
+  #about h2 {
+    font-size: clamp(26px, 4.5vw, 20px) !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+    gap: 8px !important;
+    text-wrap: pretty;
+  }
+
+  /* BWC: three screens in one row, with a larger middle screen */
+  article > div:has(> figure > img[src="assets/bwc-power-on.png"]) {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1.16fr)
+      minmax(0, 1fr);
+    align-items: end !important;
+    gap: 10px !important;
+    padding: 12px 0 !important;
+  }
+
+  article > div:has(> figure > img[src="assets/bwc-power-on.png"]) > figure {
+    min-width: 0;
+    gap: 8px !important;
+  }
+
+  article > div:has(> figure > img[src="assets/bwc-power-on.png"]) figcaption {
+    font-size: clamp(11px, 3vw, 14px) !important;
+    line-height: 1.3 !important;
+    min-height: 2.6em;
+  }
+
+  /*
+   * Two-column galleries:
+   * - BWC sketches
+   * - Applied Behavior UI screens
+   * - Eye IFX images and iterations
+   */
+  article div:has(> figure > button[data-lb-open*='"g":"sketches"']),
+  article div:has(> figure > button > img[src^="assets/ui-"]),
+  body:has(article img[src="assets/eye-pk.png"]) article div:has(> figure) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px 12px !important;
+  }
+
+  /* Allow thumbnails to shrink within their columns */
+  article div:has(> figure > button[data-lb-open*='"g":"sketches"']) > figure,
+  article div:has(> figure > button > img[src^="assets/ui-"]) > figure,
+  body:has(article img[src="assets/eye-pk.png"]) article div:has(> figure) > figure {
+    min-width: 0;
+  }
+
+  /* Smaller captions for sketches and Eye IFX images */
+  article div:has(> figure > button[data-lb-open*='"g":"sketches"']) figcaption,
+  body:has(article img[src="assets/eye-pk.png"]) article figure figcaption {
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Applied Behavior: pictures only, still tappable to enlarge */
+  article div:has(> figure > button > img[src^="assets/ui-"]) figcaption {
+    display: none;
+  }
+}
