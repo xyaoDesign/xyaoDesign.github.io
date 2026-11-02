@@ -134,3 +134,13 @@ html { scroll-behavior: smooth; }
   [data-lb-dialog] [data-act="zoom"] { display: none !important; }
   [data-lb-dialog] { touch-action: none; overscroll-behavior: contain; }
 }
+
+/* Pinned header: keep in-page links clear of it, and make it slimmer on phones. */
+html { scroll-padding-top: 96px; }
+@media (max-width: 600px) {
+  html { scroll-padding-top: 72px; }
+  header:has(> nav[aria-label="Main"]) {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+}
